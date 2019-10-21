@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组的去重</title>
+</head>
+
+<body>
+    <script>
+        // 数组排序
+        // var arr = ['a','a','b','c','ac','ab','b','abc']
+        var arr=[1,2,4,1,2,3,12,13,1]
+        let brr=[]
+        for(var i=0;i<arr.length;i++){
+            if(brr.indexOf(arr[i])===-1){
+                brr.push(arr[i])
+            }
+        }
+        console.log(brr)
+        // 数组排序
+        var crr=[1,2,3,8,6,19,4,5]
+        function insert(crr){
+            var b
+            for(var i=0;i<crr.length;i++){
+                for(var k=i;k>0;k--){
+                    if(crr[k]<crr[k-1]){
+                        b=crr[k];
+                        crr[k]=crr[k-1]
+                        crr[k-1]=b
+                        console.log(crr)
+                    }
+                }
+            }
+            return crr
+        }
+        insert(crr)
+        console.log(crr)
+    </script>
+</body>
+
+</html>
