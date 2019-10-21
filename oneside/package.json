@@ -33,7 +33,7 @@
     "@dcloudio/uni-mp-toutiao": "^2.0.0-23320190923002",
     "@dcloudio/uni-mp-weixin": "^2.0.0-23320190923002",
     "@dcloudio/uni-stat": "^2.0.0-23320190923002",
-    "flyio": "^0.6.2",
+    "flyio": "^0.6.14",
     "regenerator-runtime": "^0.12.1",
     "vue": "^2.6.10",
     "vuex": "^3.0.1"
@@ -54,6 +54,7 @@
     "mini-types": "*",
     "miniprogram-api-typings": "^2.8.0-2",
     "postcss-comment": "^2.0.0",
+    "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
