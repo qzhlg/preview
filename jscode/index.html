@@ -27,6 +27,48 @@
             }, 0)
         }
         // 1,2,3
+        // 写一个获取非行间样式的函数
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            } else {
+                getComputedStyle(obi, false)[attr]
+            }
+
+        }
+        // 希望获取到页面中所有的checkbox怎么做
+        var inputs = document.getElementsByTagName("input");//获取所有的input标签对象
+        var checkboxArray = [];//初始化空数组，用来存放checkbox对象。
+        for (var i = 0; i < inputs.length; i++) {
+            var obj = inputs[i];
+            if (obj.type == 'checkbox') {
+                checkboxArray.push(obj);
+            }
+        }
+        // 写一个function，清除字符串前后的空格。（兼容所有浏览器）
+        String.prototype.trim = function () {
+
+            return this.replace(/^\s+/, "").replace(/\s+$/, "");
+
+        }
+        // Ajax原理
+
+        // 1.创建对象
+        var xhr = new XMLHttpRequest();
+        // 2.打开请求
+        xhr.open('GET', 'example.txt', true);
+        // 3.发送请求
+        xhr.send(); //发送请求到服务器
+        // 4.接收响应
+        xhr.onreadystatechange = function () { }
+
+         // (1)当readystate值从一个值变为另一个值时，都会触发readystatechange事件。
+
+         // (2)当readystate == 4时，表示已经接收到全部响应数据。
+
+         // (3)当status == 200时，表示服务器成功返回页面和数据。
+
+         // (4)如果(2)和(3)内容同时满足，则可以通过xhr.responseText，获得服务器返回的内容。
     </script>
 </body>
 
