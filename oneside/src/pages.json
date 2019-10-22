@@ -1,6 +1,11 @@
 {
     "pages": [
-      
+        {
+            "path":"pages/sign/index",
+            "style":{
+                "navigationBarTitleText":"签到首页"
+            }
+        },
         {
             "path":"pages/finger/index",
             "style":{
@@ -8,12 +13,21 @@
             }
         },
         {
-            "path":"pages/sign/index",
+            "path":"pages/my/index",
             "style":{
-                "navigationBarTitleText":"签到首页"
+                "navigationBarTitleText":"个人中心"
+            }
+        },{
+            "path":"pages/mask/index",
+            "style":{
+                "navigationBarTitleText":"添加面试"
+            }
+        },{
+            "path":"pages/address/index",
+            "style":{
+                "navigationBarTitleText":"选择面试地址"
             }
         },
-        
         {
             "path": "pages/tabBar/API/API",
             "style": {

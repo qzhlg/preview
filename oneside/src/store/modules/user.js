@@ -1,33 +1,41 @@
-import {code2session,fingerVerify} from '../../service/index'
+import {code2session, fingerVerify, decryptPhone} from '../../service/index'
 const state={
-    openid:''
+    openid:'',
+    phone:''
 }
 
 const mutations={
-    setcode(state,payload){
+    updateOpenid(state,payload){
         state.openid=payload
+        console.log(state)
     }
 }   
 
-const actions={
+const actions = {
     async login({commit},params){
         const res=await code2session(params)
-        console.log('res.data',res.data)
-       
         if(res.openid){
-            commit('setcode',res.openid)
+            commit('updateOpenid',res.openid)
         }
     },
 
-    async fingerVerify({state:{openid}},params){
-        params.openid=openid
-        let data=await fingerVerify(params)
-        return data.code
+    async fingerVerify({state: {openid}}, params){
+        params.openid = openid;
+        console.log(params)
+        let data = await fingerVerify(params);
+        console.log('data-----',data)
+        
+        return data && data.code;
+    },
+
+    async decryptPhone({commit},params){
+        let result=await decryptPhone(params)
+        console.log('result',result)
     }
 }
 
 export default {
-    namespaced:true,
+    namespaced : true,
     state,
     mutations,
     actions
