@@ -1,6 +1,6 @@
 <template>
     <div>
-         <button open-type="getPhoneNumber" @click="getPhoneNumber">获取手机号</button>
+         <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
     </div>
 </template>
 <script>
