@@ -1,5 +1,6 @@
 {
     "pages": [
+       
         {
             "path":"pages/sign/index",
             "style":{
@@ -32,6 +33,12 @@
             "path": "pages/tabBar/API/API",
             "style": {
                 "navigationBarTitleText": "签到首页"
+            }
+        },
+        {
+            "path":"pages/list/index",
+            "style":{
+                "navigationBarTitleText":"面试列表"
             }
         },
             // pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages

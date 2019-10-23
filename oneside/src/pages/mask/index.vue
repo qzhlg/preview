@@ -1,10 +1,10 @@
 <template>
-  <form class="mask_page" report-submit="true" @submit="submit" @reset="reset">
+  <form class="mask_page" report-submit @submit="submit" >
     <h3 class="title">面试信息</h3>
     <view class="form">
       <p>
         <span>公司名称</span>
-        <input class="weui-input" focus placeholder="请输入公司名称" v-model="current.compony" />
+        <input class="weui-input" focus placeholder="请输入公司名称" v-model="current.company" />
       </p>
       <p>
         <span>公司电话</span>
@@ -32,7 +32,7 @@
       </p>
       <p class="last">
         <span>面试地址</span>
-        <input type="text" placeholder="请选择面试地址" @click="goSearch" v-model="current.address" />
+        <input type="text" placeholder="请选择面试地址" @click="goSearch" v-model="current.address.address" />
       </p>
     </view>
     <h3 class="title">备注信息</h3>
@@ -44,7 +44,7 @@
         maxlength="100"
         v-model="current.description"
       />
-      <button form-type="submit" class="commit" :class="btnEnable?'':'disable'">提交</button>
+      <button form-type="submit" :class="btnEnable?'':'disable'" >确定</button>
     </view>
   </form>
 </template>
@@ -87,8 +87,8 @@ export default {
       }
       // 判断手机号是否符合规范
       if (
-        !/^1(3|4|5|7|8)\d{9}$/.text(this.current.phone) ||
-      /!^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.text(this.current.phone)
+        !/^1(3|4|5|7|8)\d{9}$/.test(this.current.phone) ||
+      /!^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.current.phone)
       ) {
         return false;
       }
@@ -136,12 +136,14 @@ export default {
 
   methods: {
     ...mapActions({
-      addSign: "mask/addSign",
-       submitInterview: 'interview/submit'
+       submits: 'indexView/submit'
     }),
     ...mapMutations({
-      updateState: 'interview/updateState'
+      updateState: 'indexView/updateState'
     }),
+    dateChange(){
+
+    },
       // 监听多列选择器每列变化
     columnChange(e){
       let {column, value} = e.target;
@@ -163,11 +165,11 @@ export default {
     // 提交添加面试表单
    async submit(e) {
      // 判断按钮是否正在提交状态
-     if(this.submiting){
-       return false;
-     }
+    //  if(this.submiting){
+    //    return false;
+    //  }
      // 判断公司名称是否为空
-      if (!this.current.compony) {
+      if (!this.current.company) {
         wx.showToast({
           title:'请输入公司名称',
           icon:'none'
@@ -175,25 +177,32 @@ export default {
         return false;
       }
       // 判断号码是否符合规范
-      if (!/^1(3|4|5|7|8)\d{9}$/.text(this.current.phone) ||
-      /!^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.text(this.current.phone)) {
+      if (!/^1(3|4|5|7|8)\d{9}$/.test(this.current.phone) ||
+      /!^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.current.phone)) {
         wx.showToast({
-          title: '请输入面试联系人的手机或 座机',
+          title: '请输入面试联系人正确的手机号',
           icon: 'none'
         })
         return false;
       }
+      // 判断是否添加面试地址
+      if (!this.current.address.address) {
+        wx.showToast({
+          title:"请输入面试地址",
+          icon:'none'
+        })
+        return false;
+      }
       console.log(e);
-      this.addSign({
-        form_id: e.detail.formId,
-        company: "北京大学",
-        phone: "17621526605",
-        address: JSON.stringify({ address: "北京市海淀区颐和园路5号" }),
-        latitude: 39.59,
-        longitude: 116.18,
-        start_time: ~~(+new Date() / 60000) * 60000 + 65 * 60 * 1000,
-        description: "测试form_id"
-      });
+      console.log(this.current)
+       // 添加时间戳到表单
+      this.current.start_time = moment(this.dateShow).unix()*1000;
+      // 添加form_id
+      this.current.form_id = e.detail.formId;
+      // this.submiting = true;
+      let data = await this.submits(this.current);
+      console.log('data...', data);
+      // this.submiting = false;
     }
   }
 };
@@ -245,10 +254,13 @@ input,
   margin: 10px auto;
   background: #fff;
 }
-.commit {
-  margin: 10px auto;
-  background: rgba(0, 0, 0, 0.5);
+
+button{
+  margin-top: 50rpx;
   color: #fff;
-  width: 100%;
+  background: #197DBF;
+}
+button.disable{
+  background: #999;
 }
 </style>
