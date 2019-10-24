@@ -4,10 +4,10 @@ import {
 const state = {
     list:[],
     current: {
-        company: '清华',
+        company: '',
         phone: '17698781428',
         address: '',
-        description: '11'
+        description: ''
     }
 }
 const mutations = {
