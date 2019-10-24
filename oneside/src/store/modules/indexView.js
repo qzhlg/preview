@@ -2,11 +2,12 @@ import {
     addSign
 } from '../../service/index'
 const state = {
+    list:[],
     current: {
-        company: '',
-        phone: '',
+        company: '清华',
+        phone: '17698781428',
         address: '',
-        description: '123'
+        description: '11'
     }
 }
 const mutations = {
@@ -20,7 +21,6 @@ const mutations = {
 }
 const actions = {
     async submit(state, {...payload}) {
-        console.log(payload,'111111111111')
         return new Promise(async (resolve, reject) => {
             // 填充经纬度
             console.log( payload.address.location.lat)

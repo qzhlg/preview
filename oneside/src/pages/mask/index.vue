@@ -165,9 +165,9 @@ export default {
     // 提交添加面试表单
    async submit(e) {
      // 判断按钮是否正在提交状态
-    //  if(this.submiting){
-    //    return false;
-    //  }
+     if(this.submiting){
+       return false;
+     }
      // 判断公司名称是否为空
       if (!this.current.company) {
         wx.showToast({
@@ -193,16 +193,45 @@ export default {
         })
         return false;
       }
-      console.log(e);
-      console.log(this.current)
        // 添加时间戳到表单
       this.current.start_time = moment(this.dateShow).unix()*1000;
       // 添加form_id
       this.current.form_id = e.detail.formId;
-      // this.submiting = true;
+      this.submiting = true;
       let data = await this.submits(this.current);
       console.log('data...', data);
-      // this.submiting = false;
+      this.submiting = false;
+      wx.navigateTo({  url:'/pages/list/index' })
+               
+      // if (data.code==0) {
+      //   wx.showModal({
+      //     title:'温馨提示',
+      //     icon:'none',
+      //     content:data.msg,
+      //     showCancel:false,
+      //     confirmText:'确定',
+      //     confirmColor:'#197DBF',
+      //     success: (res)=> {
+      //       console.log(res)
+      //       if (res.confirm) {
+      //           this.updateState({
+      //             form_id:'',
+      //             company:'',
+      //             address:'',
+      //             phone:''
+      //           })
+      //           wx.navigateTo({
+      //             url:'/pages/list/index'
+      //           })
+      //       }
+      //     }
+      //   })
+      // }else{
+      //   wx.showToast({
+      //     title:data.msg,
+      //     icon:'fail'
+      //   })
+      // }
     }
   }
 };

@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 
 import user from './modules/user'
 import indexView from './modules/indexView'
+import sign from './modules/sign'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	modules:{
 		user,
-		indexView
+		indexView,
+		sign
 	},
 	plugins:[]
 })
