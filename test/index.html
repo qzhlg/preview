@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <style>
+        #list li{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<button id="btn">点击追加节点</button>
+<body>
+    <script>
+        console.log(a)
+        var a=1;
+        var getNum=function (){
+            a=2;
+        }
+        function getNum(){
+            a=3;
+        }
+        console.log(a)
+        getNum()
+        console.log(a)
+        // undefined 1 2
+        var list=document.getElementById('list')
+        list.onclick=(e)=>{
+            var e=e||window.event
+             var target=e.target
+             // 获取目标元素
+             if(target.nodeName=='LI'){
+                 console.log(target.innerHTML)
+             }
+        }
+        var btn=document.getElementById('btn')
+        btn.onclick=()=>{
+            var li=document.createElement('li')
+            li.textContent=list.children.length+1;
+            list.appendChild(li)
+        }
+    </script>
+</body>
+</html>
