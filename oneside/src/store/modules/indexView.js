@@ -12,7 +12,6 @@ const state = {
 }
 const mutations = {
     updateState(state, payload) {
-        console.log(state)
         state.current = {
             ...state.current,
             ...payload

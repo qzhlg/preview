@@ -32,12 +32,19 @@
         {
             "path":"pages/list/index",
             "style":{
-                "navigationBarTitleText":"面试列表"
+                "navigationBarTitleText":"面试列表",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance":50
             }
         },{
             "path":"pages/detail/index",
             "style":{
                 "navigationBarTitleText":"详情"
+            }
+        },{
+            "path":"pages/clockin/index",
+            "style":{
+                "navigationBarTitleText":"去打卡"
             }
         },
         {

@@ -40,12 +40,18 @@ async getSignList({commit, state}, payload){
       item.address = JSON.parse(item.address);
       item.start_time = formatTime(item.start_time);
     })
-    commit('updateState',result)
+    commit('updateState',{list:result})
+    // 判断是替换还是追加
+    if(state.page==1){
+      commit('updateState',{list:result})
+    }else{
+      commit('updateState',{list:[...state.list,...result]})
+    }
+   
   },
   // 详情页
   async goDetail({commit},payload){
     let res=await getSigndetail(payload)
-    console.log(res[0].address,'-------------------------------------------------')
     if (res[0].address){
       res[0].address = JSON.parse(res[0].address);
     }
@@ -54,6 +60,10 @@ async getSignList({commit, state}, payload){
   },
   async updateDetail({commit,dispatch},payload){
     const result=await updateSign(payload.id,payload.params)
+    if(result.code==0){
+      // 重新获取面试详情
+      dispatch('goDetail',payload.id)
+    }
     console.log(result,'yyyyyyyyyyyyy')
   }
 }

@@ -18,5 +18,5 @@ export function getSignListed(params){
 
    // 更新面试信息
  export function updateSign(id,params){
-    return request.post('/sign?id='+id,params)
+    return request.put('/sign/'+id,params)
 }

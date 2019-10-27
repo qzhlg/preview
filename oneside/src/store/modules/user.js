@@ -30,7 +30,7 @@ const actions = {
 
     async decryptPhone({commit},params){
         let result=await decryptPhone(params)
-        console.log('result',result)
+        return result
     }
 }
 

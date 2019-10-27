@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>打乱数组的方法</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        arr.sort(() => Math.random() - 0.5);
+        console.log(arr)
+        // 2.
+        let brr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        function shuffle(brr) {
+            let i = brr.length;
+            while (i) {
+                let j = Math.floor(Math.random() * i--);
+                [brr[j], brr[i]] = [brr[i], brr[j]];
+            }
+            return brr;
+        }
+        shuffle(brr);
+        console.log(brr)
+        // 3
+        let crr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        for (let i = 0, len = crr.length; i < len; i++) {
+            let currentRandom = parseInt(Math.random() * (len - 1));
+            let current = crr[i];
+            crr[i] = crr[currentRandom];
+            crr[currentRandom] = current;
+        }
+        console.log(crr)
+        // 4
+        let drr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], newdrr = [];
+        for (let i = 0, len = drr.length; i < len;) {
+            i++;
+            let currentRandom = parseInt(Math.random() * len);
+            if (!newdrr.includes(drr[currentRandom])) {
+                newdrr.push(drr[currentRandom]);
+            } else {
+                i--;
+            }
+        }
+        console.log(newdrr)
+    </script>
+</body>
+
+</html>

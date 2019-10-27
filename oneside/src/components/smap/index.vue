@@ -1,6 +1,10 @@
 <template>
   <div class="map">
-    <map name="map" :latitude="latitude" :longitude="longitude"></map>
+    <map name="map"
+     show-location=true
+    :latitude="latitude" 
+     :longitude="longitude"
+     ></map>
   </div>
 </template>
 <script>
@@ -11,6 +15,11 @@ export default {
       longitude: 116.29845,
       latitude: 39.95933
     };
+  },
+  computed:{
+    points(){
+      return [{longitude:this.longitude,latitude:this.latitude}]
+    }
   },
   props: {
     markers: {

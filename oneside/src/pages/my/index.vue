@@ -5,21 +5,28 @@
         <img src="/static/images/my.png" alt />
       </p>
 
-      <p></p>
+      <p class="phone">
+        176****1428
+      </p>
     </div>
     <ul class="bottom">
       <li @click="goMask">
         <icon type="waiting" size="20" class="icon" />我的面试
       </li>
-      <li open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
-        <icon type="info" size="20" class="icon" />客服中心
-      </li>
+      <button open-type="contact" @bindcontact="handleContact" class="person">
+        <icon type="info" size="20" class="icon" />
+        <span>客服中心</span>
+      </button>
     </ul>
+    <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" v-show="phone.length">获取手机号</button>
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions,mapState } from "vuex";
 export default {
+  data() {
+    return {};
+  },
   methods: {
     ...mapActions({
       decryptPhone: "user/decryptPhone"
@@ -41,6 +48,15 @@ export default {
         url: "/pages/list/index"
       });
     }
+  },
+  computed:{
+      ...mapState({
+          phone:state=>state.user.phone
+      })
+  },
+  handleContact(e) {
+    console.log(e.detail.path);
+    console.log(e.detail.query);
   }
 };
 </script>
@@ -68,6 +84,10 @@ export default {
 .bottom {
   height: 120px;
 }
+.phone{
+  text-align: center;
+  
+}
 .bottom li {
   height: 60px;
   border-bottom: 1px #ccc solid;
@@ -75,6 +95,13 @@ export default {
   font-size: 14px;
 }
 .bottom li .icon {
-  margin: 10px;
+  margin: 14px;
+}
+.person {
+  text-align: left;
+}
+.person span {
+  margin: 0 13px;
+  font-size: 14px;
 }
 </style>

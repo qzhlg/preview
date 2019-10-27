@@ -44,7 +44,7 @@ export default {
     }),
     checkIndex(index) {
       this.updateState({ active: (index + 1) % 4, page: 1 });
-      this.getSignList();
+      this.getSignList(); 
     },
     goDetail(id){
       wx.navigateTo({url: `/pages/detail/index?id=${id}`})
@@ -60,7 +60,26 @@ export default {
   },
  async onShow() {
    await this.getSignList();
-  }
+   console.log(this.list,'111111')
+  },
+  onPullDownRefresh() {
+    // 上拉刷新
+    // if (!this.hasMore) {
+      // this. fetchArticleList(1, true).then(() => {
+        // 处理完成后，终止下拉刷新
+        wx.stopPullDownRefresh()
+      // })
+    // }
+  },
+
+
+   onReachBottom() {
+    // 下拉触底，先判断是否有请求正在进行中
+    if (this.hasMore) {
+      this.updateState({page:this.page+1})
+      this.getSignList()
+    }
+  },
 };
 </script>
 <style scoped>

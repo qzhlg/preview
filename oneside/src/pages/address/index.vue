@@ -1,6 +1,6 @@
 <template>
   <view class="address">
-    <p>
+    <p class="city">
       <span>北京</span>
       <input type="text" focus placeholder="面试地址" v-model="address" @input="watchMethod" />
     </p>
@@ -11,9 +11,14 @@
         hover-class="hover"
         @click="select(index)"
       >
-        <div>
-          <p>{{item.title}}</p>
-          <p>{{item.address}}</p>
+        <div class="add">
+          <div class="line">
+            <p class="img"><img src="/static/images/logo.png" alt=""></p>
+            <div class="com">
+              <h3>{{item.title}}</h3>
+              <span>{{item.address}}</span>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
@@ -72,7 +77,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-p {
+.city {
   height: 40px;
   border-bottom: 0.5px #ccc solid;
   display: flex;
@@ -87,5 +92,35 @@ input {
   display: inline-block;
   height: 100%;
   flex: 7;
+}
+.line{
+  height: 60px;
+  border-bottom: .5px #ccc solid;
+  display: flex;
+}
+.img{
+  flex: 2;
+}
+
+.com{
+  flex: 8;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.com h3{
+  width: 100%;
+  font-size: 16px;
+  
+}
+.com span{
+  color: gray;
+
+}
+.add .line img{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 15px;
 }
 </style>

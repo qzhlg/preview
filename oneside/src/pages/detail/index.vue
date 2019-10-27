@@ -27,8 +27,8 @@
       </li>
     </ul>
     <section v-if="info.status==-1 && !data.view" class="action">
-      <button>去打卡</button>
-      <button>放弃面试</button>
+      <button @click="goClock">去打卡</button>
+      <button @click="giveUp">放弃面试</button>
     </section>
   </div>
 </template>
@@ -38,20 +38,43 @@ export default {
   onLoad(options) {
     this.id = options.id;
     // 把view属性加到响应监听里面
-    this.$set(this.data, 'view', options.view || false)
+    this.$set(this.data, "view", options.view || false);
   },
   methods: {
     ...mapActions({
       goDetail: "sign/goDetail",
-      updateDetail:"sign/updateDetail"
+      updateDetail: "sign/updateDetail"
     }),
-    cancelRemember(e){
+    cancelRemember(e) {
       // 取消提醒
-      console.log(e,'www')
+      console.log(e, "www");
       this.updateDetail({
         id: this.id,
-        params: {remind: e.target.value?1:-1}
-      })
+        params: { remind: e.target.value ? 1 : -1 }
+      });
+    },
+    giveUp() {
+      wx.showModal({
+        title: "温馨提示",
+        content: "确定要放弃面试吗？",
+        success:async(res) =>{
+          if (res.confirm) {
+            console.log("用户点击确定");
+            // 当用户点击确定的时候将会更新面试状态
+            await this.updateDetail({
+              id:this.id,
+              params:{status:1}
+            })
+          } else if (res.cancel) {
+            console.log("用户点击取消");
+          }
+        }
+      });
+    },
+    goClock(){
+        wx.navigateTo({
+          url:'/pages/clockin/index'
+        })
     }
   },
   computed: {

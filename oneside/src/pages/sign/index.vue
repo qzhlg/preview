@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
-    <!-- <smap class="map-modle"></smap> -->
-    <map name="map" show-location=true :latitude="latitude" :longitude="longitude"></map>
+    <smap class="map-modle"></smap>
+    <!-- <map name="map" show-location=true :latitude="latitude" :longitude="longitude"></map> -->
     <div class="mine">
       <img src="/static/images/my.png" alt="" @click="gomine">
     </div>
@@ -9,17 +9,13 @@
   </div>
 </template>
 <script>
-// import smap from '../../components/smap'
+import smap from '../../components/smap'
 
 export default {
   name: "sign",
-    data() {
-    return {
-      longitude: 116.29845,
-      latitude: 39.95933
-    };
+  components:{
+    smap
   },
-
   methods: {
     addmask() {
       
